@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button class="backbtn" routerLink="/welcome" routerDirection="back">
+        <img src="../../assets/back.svg" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="ion-padding container">
+    <h1>Login</h1>
+
+    <div class="form-container">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+      <ion-button [disabled]="validateSigninForm()" expand="block" class="main-button" (click)="submitSigninForm()">
+        <span *ngIf="!isLoading">Log in</span>
+        <span *ngIf="isLoading">Loading...</span>
+      </ion-button>
+
+      <div class="sign-up">
+        Don't have an account? <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
+      </div>
+
+      <div class="sign-up">
+        <ion-button color="dark" fill="clear" routerLink="/home" routerDirection="forward">Go To Home</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Products</ion-title>
+  </ion-toolbar>
+  <div *ngIf="isLoading" class="progress ion-text-center">
+    <ion-progress-bar class="progress" type="indeterminate"></ion-progress-bar>
+  </div>
+
+</ion-header>
+
+<ion-content *ngIf="!isLoading && products.length > 0">
+  <ion-list class="ios list-ios hydrated" inset>
+    <ion-item style="margin-bottom: 10px;" class="ion-no-padding ion-item" *ngFor="let product of products" (click)="productClicked(product)">
+      <ion-thumbnail style="height:100px; width:100px" slot="start" class="ios hydrated">
+        <img  style="border-radius: 15px;" src="{{ product.images[0] ? product.images[0].src : 'assets/products/prod-1.png'  }}">
+      </ion-thumbnail>
+      <ion-label>
+        <p>{{ product.name }}</p>
+        <h2> Price: <b>35$</b> </h2>
+        <p>This is product description</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-content *ngIf="!isLoading && products.length < 1">
+  <div class="fullheight xc">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-icon class="slash" style="font-size: 250px;" name="cube"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-top: 30px;">
+        <ion-col size="12">
+          <h4>No Products found for this category</h4>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-buttons>
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+  <ion-toolbar>
+    <ion-title style="font-size: x-large;">Spin To Win</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-header>
+
+  <ion-navbar>
+    <ion-title>Spin Wheel</ion-title>
+  </ion-navbar>
+
+</ion-header> -->
+
+
+<ion-content no-padding>
+  <!-- <span>
+    <p>
+      Try your luck to get discount coupon
+      1 spin per email
+      No cheating
+    </p>
+  </span> -->
+  <ion-row style="margin-top:10%;margin-left:9%;">
+    <ion-col col-12 text-center>
+      <div id="wheel">
+        <canvas #myCanvas width="auto" height="300"></canvas>
+      </div>
+    </ion-col>
+    <!-- <ion-col offset-1 col-10> -->
+      <!-- <button #spin class="stopButton" (click)="onStartClick()">Start</button> -->
+  <!-- </ion-col> -->
+
+    <div class="form-container">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email"  color="dark" fill="clear"></ion-input>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password"  color="dark" fill="clear"></ion-input>
+      </ion-item> -->
+
+      <ion-button [disabled]="validateEmail()" expand="block" class="main-button" (click)="onStartClick()">
+        <span *ngIf="!isLoading">TRY YOUR LUCK</span>
+        <!-- <span *ngIf="isLoading">Loading...</span> -->
+      </ion-button>
+
+      <ion-button [disabled]="validateStopButton()" expand="block" class="main-button" (click)="onStopClick()">
+        <span *ngIf="!isLoading">STOP</span>
+      </ion-button>
+
+      <!-- <div class="sign-up">
+        Don't have an account? <ion-button color="dark" fill="clear" routerLink="/signup" routerDirection="forward">Sign up</ion-button>
+      </div>
+
+      <div class="sign-up">
+        <ion-button color="dark" fill="clear" routerLink="/home" routerDirection="forward">Go To Home</ion-button>
+      </div> -->
+    </div>
+
+
+  </ion-row>
+</ion-content>

@@ -1,0 +1,26 @@
+.bg-color {
+    --ion-background-color: #189A7A !important
+}
+
+.form-container {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+.form-container ion-item {
+    --padding-start: 0;
+    --border-color: #DADADA;
+}
+
+.form-container ion-item ion-label {
+    color: #A6A6A6;
+}
+
+.form-container ion-item ion-icon {
+    margin-top: auto;
+    color: #c6cbd4;
+}
+
+.form-container ion-button {
+    margin-top: 10%;
+}

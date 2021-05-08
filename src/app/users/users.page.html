@@ -1,0 +1,22 @@
+<ion-header style="box-shadow: brown;">
+  
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Users</ion-title>
+    <!-- style="background-color: brown" -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div style="background-color: lightgray; height: 2px;"></div>
+  <ion-card style="margin-inline: 0px; margin-top: 0px; background-color: white;">
+    <ion-list *ngIf="users?.length > 0">
+      <ion-item lines="full" *ngFor="let user of users">
+        {{user.fullName}}
+        <ion-toggle style="color: green;" slot="end" [disabled] = "user.subscription" [checked]="user.subscription" (ionChange)="toggleSubscription($event,user.userId)"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

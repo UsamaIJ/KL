@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Category</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content [fullscreen]="true">
+
+  <ion-header collapse="condense">
+    <ion-toolbar> -->
+      <!-- <ion-title size="large">Category Details</ion-title>  -->
+    <!-- </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngFor="let item of categories">
+    <ion-item (click)="categoryClicked(item.id)"> -->
+      <!-- <ion-thumbnail slot="start">
+        <img src='../../assets/logos/{{trimAndLowerCaseBusinessName(s.transactions[0].biz_name)}}.png'>
+      </ion-thumbnail> -->
+      <!-- <ion-label> -->
+        <!-- <h2>{{item.name}}</h2> -->
+        <!-- <p>accounts: {{s.totalBankAccounts.length}}</p> -->
+      <!-- </ion-label> -->
+      <!-- <ion-label class="amount-label" fill="outline" slot="end">{{s.total | currency:'USD'}}</ion-label> -->
+    <!-- </ion-item>  
+  </ion-card> -->
+
+
+  <!-- <ion-row>
+    <ion-col size="5" *ngFor="let product of categories" (click)="categoryClicked(item.id)">
+      <h4>{{ product.name }}</h4>
+      <img src="{{ product.images[0] ? product.images[0].src : 'assets/products/prod-1.png'  }}" />
+    </ion-col>
+  </ion-row> -->
+
+  <!-- <div class="category-slider ion-padding-start">
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let category of categories">
+        <ion-col (click)="categoryClicked(category.id)">
+          <h4>{{ category.name }}</h4>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div> -->
+
+<!-- </ion-content> -->
+
+
+<ion-content>
+  <div class="category-slider ion-padding-start">
+    <!-- <ion-grid> -->
+    <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"> -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5" *ngFor="let category of categories" (click)="categoryClicked(category.id)">
+          <h4>{{ category.name }}</h4>
+          <img src="{{randomGenerator() }}" />
+        </ion-col>
+      </ion-row>
+      <!-- </ion-slide>
+    </ion-slides> -->
+    </ion-grid>
+  </div>
+</ion-content>

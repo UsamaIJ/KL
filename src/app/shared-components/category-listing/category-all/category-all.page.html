@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-buttons>
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+  <ion-toolbar>
+    <ion-title>All Categories</ion-title>
+  </ion-toolbar>
+  <div class="progress ion-text-center">
+    <!-- <ion-progress-bar class="progress" type="indeterminate"></ion-progress-bar> -->
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="category-slider ion-padding-start">
+    <!-- <ion-grid> -->
+    <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"> -->
+    <ion-grid style="margin-top: 15px;">
+      <ion-row>
+        <ion-col size="5" *ngFor="let category of categories" (click)="categoryClicked(category)">
+          <img src="{{ category.image && category.image.src ? category.image.src : randomGenerator() }}" />
+          <span>{{ category.name }}</span>
+        </ion-col>
+      </ion-row>
+      <!-- </ion-slide>
+    </ion-slides> -->
+    </ion-grid>
+  </div>
+</ion-content>
