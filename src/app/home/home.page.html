@@ -27,8 +27,8 @@
 
   <div>
     <ion-slides pager #mySlider class="slides" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
-      <ion-slide *ngFor="let number of [1,2,3,4,5,6]" style="padding-left: 7%;padding-right: 7%;">
-        <img src="../../../../assets/products/prod-7.jpg" style="object-fit: scale-down; border-radius: 5%;"/>
+      <ion-slide *ngFor="let number of sliderImage" style="padding-left: 7%;padding-right: 7%;">
+        <img src=${{number.src}} style="object-fit: scale-down; border-radius: 5%;"/>
       </ion-slide>
     </ion-slides>
   </div>
@@ -44,7 +44,7 @@
   <div class="category-slider ion-padding-start">
         <ion-grid>
           <ion-row>
-            <ion-col size="3" *ngFor="let category of categories">
+            <ion-col size="4" *ngFor="let category of categories">
                 <div class="category-container" (click)="categoryClicked(category.id)">
                   <ion-avatar>
                     <ion-img [src]="category.image && category.image.src ? category.image.src : randomGenerator()"></ion-img>

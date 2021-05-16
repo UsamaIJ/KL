@@ -41,7 +41,7 @@ export class SpinWheelPage implements OnInit {
     if(this.localStorage) {
     this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
     this.loggedIn =  true;
-    alert(this.loggedIn);
+    // alert(this.loggedIn);
 
     }
     else {
@@ -168,7 +168,7 @@ console.log("this.loggedIn", this.loggedIn)
     else if(this.loggedIn == true && this.subscribed == false)
     {
       this.subscribeToast(
-        "Please Subscribe to purchase the item",
+        "To enable subscription Contact Admin at 0333-1234567",
         "warning"
         );
     }

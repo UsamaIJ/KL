@@ -81,6 +81,7 @@ export class AuthenticationService {
     this._isLoading = true;
     try {
       let user = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+      // let user = await this.afAuth.auth.signInWithPhoneNumber(email, password);
       let userInfo;
       if(user){
         userInfo = await this.firestore.collection('users').doc(user.user.uid).get().toPromise().then((userInfo)=>{

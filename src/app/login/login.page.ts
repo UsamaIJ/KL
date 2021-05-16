@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   isLoading: boolean = false;
+  enableLoginEmail = true;
+  enableLoginPhone = false;
   email: string;
   password: string;
 
@@ -37,6 +39,16 @@ export class LoginPage implements OnInit {
       return true;
     else
       return false;
+  }
+
+  enableEmail() {
+    this.enableLoginEmail = true;
+    this.enableLoginPhone = false;
+  }
+
+  enablePhone() {
+    this.enableLoginEmail = false;
+    this.enableLoginPhone = true;
   }
 
   submitSigninForm(){

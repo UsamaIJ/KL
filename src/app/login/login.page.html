@@ -9,18 +9,47 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
+  <div>
+        <img src="../../assets/login1.jpg" style="object-fit: scale-down; border-radius: 5%;"/>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6>
+              <ion-button expand="full" [ngClass]="{'email-button' : true == true, 'email-phone-enable-button-background-color' : enableLoginEmail == true, 'email-phone-disable-button-background-color' : enableLoginEmail == false}" (click)="enableEmail()">
+                <span *ngIf="!isLoading">Email</span>
+              </ion-button>
+            </ion-col>
+            <ion-col col-6>
+              <ion-button expand="full" [ngClass]="{'email-button' : true == true, 'email-phone-enable-button-background-color' : enableLoginPhone == true , 'email-phone-disable-button-background-color' : enableLoginPhone == false}" (click)="enablePhone()">
+                <span *ngIf="!isLoading">Phone</span>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      
+      </div>
+  <!-- <img alt="logo" height="40"   src="../../assets/login.jpg" >   -->
   <div class="ion-padding container">
-    <h1>Login</h1>
 
     <div class="form-container">
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="email"></ion-input>
+      </ion-item> -->
+
+      <ion-item>
+        <ion-label *ngIf="enableLoginEmail" position="floating">Email</ion-label>
+        <ion-label *ngIf="enableLoginPhone" position="floating">Phone</ion-label>
         <ion-input [(ngModel)]="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Password</ion-label>
         <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
+
+      <div class="sign-up">
+        <ion-icon name="lock-closed-outline"></ion-icon><ion-button color="dark" fill="clear" routerLink="/forgot-password" routerDirection="forward">Forgot password? </ion-button>
+      </div>
 
       <ion-button [disabled]="validateSigninForm()" expand="block" class="main-button" (click)="submitSigninForm()">
         <span *ngIf="!isLoading">Log in</span>

@@ -47,3 +47,20 @@ ion-toolbar {
 .sign-up ion-button {
     margin: 0;
 }
+
+.email-button {
+    // --background: linear-gradient(90deg, rgba(102,126, 234, 1) 0%, rgba(100, 182, 255, 1) 100%);
+    --box-shadow: none;
+    position: relative;
+    height: 50px;
+    margin-bottom: 15px;
+    width: 107%
+}
+
+.email-phone-enable-button-background-color {
+    --background: #6688EE;
+}
+
+.email-phone-disable-button-background-color {
+    --background: #B2D7FE;
+}

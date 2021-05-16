@@ -25,12 +25,10 @@ export class HomePage implements OnInit {
   public bestSellProducts = [];
   public products: any = [];
   public isLoading = true;
-  public sliderImage = [{src: '../../../../assets/products/prod-1.png'},
-  {src: '../../../../assets/products/prod-2.png'},
-  {src: '../../../../assets/products/prod-3.png'},
-  {src: '../../../../assets/products/prod-4.png'},
-  {src: '../../../../assets/products/prod-5.png'},
-  {src: '../../../../assets/products/prod-6.png'}]
+  public sliderImage = [{src: '../../../../assets/products/background1.jpg'},
+  {src: '../../../../assets/products/background1.jpg'},
+  {src: '../../../../assets/products/background1.jpg'},
+  {src: '../../../../assets/products/background1.jpg'}]
 
   constructor(
     private data: DataService,
@@ -48,8 +46,8 @@ export class HomePage implements OnInit {
     this.bestSellProducts = this.data.getBestSellProducts();
     let params = <categoryFilter>{ };
     params.parent = 0;
-    params.page = 1;
-    params.per_page = 8;
+    params.page = 6;
+    params.per_page = 6;
     this._categoryService.getCategories(params).then((categories) =>{
       console.log("Categories", categories);
       this.categories = categories;

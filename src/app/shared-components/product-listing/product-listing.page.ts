@@ -68,7 +68,7 @@ export class ProductListingPage implements OnInit {categoryID:any = null;
     else if(this.loggedIn == true && this.subscribed == false && this.categoryID == 264)
     {
       this.subscribeToast(
-        "Please Subscribe to purchase the item",
+        "To enable subscription Contact Admin at 0333-1234567",
         "warning"
         );
     }
