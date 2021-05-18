@@ -35,6 +35,7 @@ export class AuthenticationService {
         this._jwtToken = await this.afAuth.auth.currentUser.getIdToken(true);
         this._userId = await this.afAuth.auth.currentUser.uid;
         let userInfo = await this.firestore.collection('users').doc(this._userId).valueChanges();
+        window.localStorage.setItem('user', JSON.stringify(userInfo));
         console.log(userInfo);
       } else {
         this._isAuthenticated = false;
@@ -63,6 +64,8 @@ export class AuthenticationService {
     return this._isLoading;
   }
 
+
+
   // async login(email: string, password: string) {
   //   this._isLoading = true;
   //   try {
@@ -83,10 +86,10 @@ export class AuthenticationService {
       let user = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
       // let user = await this.afAuth.auth.signInWithPhoneNumber(email, password);
       let userInfo;
-      if(user){
-        userInfo = await this.firestore.collection('users').doc(user.user.uid).get().toPromise().then((userInfo)=>{
+      if (user) {
+        userInfo = await this.firestore.collection('users').doc(user.user.uid).get().toPromise().then((userInfo) => {
           return userInfo.data();
-        });  
+        });
         // userInfo = afs.collection<Shirt>('shirts');
         // .snapshotChanges() returns a DocumentChangeAction[], which contains
         // a lot of information about "what happened" with each change. If you want to
@@ -96,7 +99,7 @@ export class AuthenticationService {
         //       .toPromise()
         //       .then(
         //           res => { // Success
-    
+
         //             console.log(res);
         //             resolve(res);
         //           },
@@ -106,15 +109,15 @@ export class AuthenticationService {
         //       );
         // });
         // userInfo = await promise;
-        
+
 
       }
-        
+
       console.log("User Inform returned from login", Object.assign(userInfo, { id: user.user.uid }));
       window.localStorage.setItem('user', JSON.stringify(userInfo));
       this._isLoading = false;
       return true;
-      
+
       // if(userInfo){
       //   if(userInfo.role === "Admin")
       //     this.router.navigate([`/employees`]);
@@ -135,15 +138,15 @@ export class AuthenticationService {
   async register(user: any) {
     this._isLoading = true;
     try {
-      console.log("Signup Form",user);
+      console.log("Signup Form", user);
       let user_data = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
       await this.firestore.collection('users').doc(user_data.user.uid).set(user);
-      this.presentToast("User has been registered successfull","success");
+      this.presentToast("User has been registered successfull", "success");
       return true;
     } catch (ex) {
       console.log(ex);
       this._isLoading = false;
-      this.presentToast("User registration failed","error");
+      this.presentToast("User registration failed", "error");
       return false;
     }
   }

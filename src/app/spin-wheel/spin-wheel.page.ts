@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   import { ToastController, NavController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 
 
 @Component({
@@ -33,22 +35,23 @@ export class SpinWheelPage implements OnInit {
   width: any;
   center: any;
   lock = false;
-  constructor(public navCtrl: NavController,private toast: ToastController,private router: Router) {
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      this.localStorage = window.localStorage.getItem('user');
-    this.localStorage = JSON.parse(this.localStorage);
-    console.log("spin wheel user", this.localStorage);
-    if(this.localStorage) {
-    this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
-    this.loggedIn =  true;
+  constructor(public navCtrl: NavController,private toast: ToastController,private router: Router,private auth: AuthenticationService,
+    private db: AngularFirestore) {
+    // this.router.routeReuseStrategy.shouldReuseRoute = function() {
+    //   this.localStorage = window.localStorage.getItem('user');
+    // this.localStorage = JSON.parse(this.localStorage);
+    // console.log("spin wheel user", this.localStorage);
+    // if(this.localStorage) {
+    // this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
+    // this.loggedIn =  true;
     // alert(this.loggedIn);
 
-    }
-    else {
-      this.loggedIn = false
-       }
-       return false;
-  };
+    // }
+    // else {
+    //   this.loggedIn = false
+    //    }
+    //    return false;
+  // };
     this.speed = 0;
     this.deg = this.rand(0, 360);
     let canvas = document.createElement('canvas');
@@ -59,17 +62,19 @@ export class SpinWheelPage implements OnInit {
 
 
   async ngOnInit() {
-
-    this.localStorage = window.localStorage.getItem('user');
-    this.localStorage = JSON.parse(this.localStorage);
-    console.log("spin wheel user", this.localStorage);
-    if(this.localStorage) {
-    this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
-    this.loggedIn =  true;
-    }
-    else {
-      this.loggedIn = false
-       }
+    this.db.collection('users').doc(this.auth.userId).valueChanges().subscribe((user) =>{
+      this.localStorage = user;
+      // this.localStorage = JSON.parse(this.localStorage);
+      console.log("spin wheel user", this.localStorage);
+      if(this.localStorage) {
+      this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
+      this.loggedIn =  true;
+      }
+      else {
+        this.loggedIn = false
+         }
+    });
+    
     }
 
   ngAfterViewInit(): void {
