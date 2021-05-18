@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-  import { ToastController, NavController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthenticationService } from '../services/authentication/authentication.service';
@@ -18,8 +18,8 @@ export class SpinWheelPage implements OnInit {
 
   email: string;
   stopButton: boolean = false;
-  localStorage: any =[];
-  subscribed:boolean = false;
+  localStorage: any = [];
+  subscribed: boolean = false;
   loggedIn: boolean = false;
   enableSpin: boolean = true;
 
@@ -31,11 +31,11 @@ export class SpinWheelPage implements OnInit {
   deg: any;
   public speed: any;
   slowDownRand: any = 0;
-  isStopped:any = false;
+  isStopped: any = false;
   width: any;
   center: any;
   lock = false;
-  constructor(public navCtrl: NavController,private toast: ToastController,private router: Router,private auth: AuthenticationService,
+  constructor(public navCtrl: NavController, private toast: ToastController, private router: Router, private auth: AuthenticationService,
     private db: AngularFirestore) {
     // this.router.routeReuseStrategy.shouldReuseRoute = function() {
     //   this.localStorage = window.localStorage.getItem('user');
@@ -51,7 +51,7 @@ export class SpinWheelPage implements OnInit {
     //   this.loggedIn = false
     //    }
     //    return false;
-  // };
+    // };
     this.speed = 0;
     this.deg = this.rand(0, 360);
     let canvas = document.createElement('canvas');
@@ -62,20 +62,35 @@ export class SpinWheelPage implements OnInit {
 
 
   async ngOnInit() {
-    this.db.collection('users').doc(this.auth.userId).valueChanges().subscribe((user) =>{
-      this.localStorage = user;
-      // this.localStorage = JSON.parse(this.localStorage);
+    if (this.auth.userId) {
+      this.db.collection('users').doc(this.auth.userId).valueChanges().subscribe((user) => {
+        this.localStorage = user;
+        // this.localStorage = JSON.parse(this.localStorage);
+        console.log("spin wheel user", this.localStorage);
+        if (this.localStorage) {
+          this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
+          this.loggedIn = true;
+        }
+        else {
+          this.loggedIn = false
+        }
+      });
+    }
+    else {
+      this.localStorage = window.localStorage.getItem('user')
+      this.localStorage = JSON.parse(this.localStorage);
       console.log("spin wheel user", this.localStorage);
-      if(this.localStorage) {
-      this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
-      this.loggedIn =  true;
+      if (this.localStorage) {
+        this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
+        this.loggedIn = true;
       }
       else {
         this.loggedIn = false
-         }
-    });
-    
+      }
     }
+
+
+  }
 
   ngAfterViewInit(): void {
     // alert("here")
@@ -156,32 +171,30 @@ export class SpinWheelPage implements OnInit {
     window.requestAnimationFrame(this.anim.bind(this));
   };
 
-  onStopClick(){
-      this.isStopped = true;
-      this.stopButton = false;
+  onStopClick() {
+    this.isStopped = true;
+    this.stopButton = false;
   }
 
-  onStartClick(){
-console.log("this.subscribed", this.subscribed)
-console.log("this.loggedIn", this.loggedIn)
-    if(this.subscribed == true && this.loggedIn == true)
-   {
-    this.enableSpin = false;
-    this.stopButton = true;
-    this.anim();
-   }
-    else if(this.loggedIn == true && this.subscribed == false)
-    {
+  onStartClick() {
+    console.log("this.subscribed", this.subscribed)
+    console.log("this.loggedIn", this.loggedIn)
+    if (this.subscribed == true && this.loggedIn == true) {
+      this.enableSpin = false;
+      this.stopButton = true;
+      this.anim();
+    }
+    else if (this.loggedIn == true && this.subscribed == false) {
       this.subscribeToast(
         "To enable subscription Contact Admin at 0333-1234567",
         "warning"
-        );
+      );
     }
     else if (this.loggedIn == false) {
       this.loginToast(
         "Please login to view the item",
         "warning"
-        );
+      );
     }
   }
 
@@ -210,7 +223,7 @@ console.log("this.loggedIn", this.loggedIn)
 
         }
       ]
-      
+
     });
     toast.present();
   }
@@ -223,10 +236,10 @@ console.log("this.loggedIn", this.loggedIn)
   }
 
   validateStopButton() {
-    if(this.stopButton !=  true)
-    return true;
-    else 
-    return false;
+    if (this.stopButton != true)
+      return true;
+    else
+      return false;
   }
 
 }

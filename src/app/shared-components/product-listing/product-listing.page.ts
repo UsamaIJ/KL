@@ -42,33 +42,62 @@ export class ProductListingPage implements OnInit {categoryID:any = null;
     this.categoryID = this.router.getCurrentNavigation().extras.state.id;
     // alert(this.auth.userId);
     console.log(this.auth.userId);
-    this.db.collection('users').doc(this.auth.userId).valueChanges().subscribe((user) =>{
-      console.log("User Information", user);
-      this.localStorage = user;
-      // this.localStorage = JSON.parse(this.localStorage);
-      if(this.localStorage) {
-      this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
-      this.loggedIn =  true;
-      }
-      else {
-        this.loggedIn = false
-         }
-  
-      
-  
-      let params = <productFilter> { };
-  
-          params.category = this.categoryID;
-          //  '264';
-          //  this.categoryID;
-          params.page = 1;
-          params.per_page = 10;
-  
-          this._productService.getProducts(params).then((products) =>{
-            this.products = products;
-            this.isLoading = false;
-          });
-    });
+    if(this.auth.userId){
+      this.db.collection('users').doc(this.auth.userId).valueChanges().subscribe((user) =>{
+        console.log("User Information", user);
+        this.localStorage = user;
+        // this.localStorage = JSON.parse(this.localStorage);
+        if(this.localStorage) {
+        this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
+        this.loggedIn =  true;
+        }
+        else {
+          this.loggedIn = false
+           }
+    
+        
+    
+        let params = <productFilter> { };
+    
+            params.category = this.categoryID;
+            //  '264';
+            //  this.categoryID;
+            params.page = 1;
+            params.per_page = 10;
+    
+            this._productService.getProducts(params).then((products) =>{
+              this.products = products;
+              this.isLoading = false;
+            });
+      });
+    }
+    else{
+      this.localStorage = window.localStorage.getItem('user');
+        this.localStorage = JSON.parse(this.localStorage);
+        if(this.localStorage) {
+        this.subscribed = this.localStorage.subscription == true && this.localStorage.subscriptionVerified == true ? true : false;
+        this.loggedIn =  true;
+        }
+        else {
+          this.loggedIn = false
+           }
+    
+        
+    
+        let params = <productFilter> { };
+    
+            params.category = this.categoryID;
+            //  '264';
+            //  this.categoryID;
+            params.page = 1;
+            params.per_page = 10;
+    
+            this._productService.getProducts(params).then((products) =>{
+              this.products = products;
+              this.isLoading = false;
+            });
+    }
+    
     // alert("User Information");
     
   }
