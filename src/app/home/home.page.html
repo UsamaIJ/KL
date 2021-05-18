@@ -28,7 +28,7 @@
   <div>
     <ion-slides pager #mySlider class="slides" (ionSlidesDidLoad)="slidesDidLoad(mySlider)">
       <ion-slide *ngFor="let number of sliderImage" style="padding-left: 7%;padding-right: 7%;">
-        <img src=${{number.src}} style="object-fit: scale-down; border-radius: 5%;"/>
+        <img src=${{number.src}} style="object-fit: scale-down; border-radius: 5%;" />
       </ion-slide>
     </ion-slides>
   </div>
@@ -42,22 +42,22 @@
   </div>
 
   <div class="category-slider ion-padding-start">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="4" *ngFor="let category of categories">
-                <div class="category-container" (click)="categoryClicked(category.id)">
-                  <ion-avatar>
-                    <ion-img [src]="category.image && category.image.src ? category.image.src : randomGenerator()"></ion-img>
-                  </ion-avatar>
-                  <span class="category-name">{{category.name}}</span>
-                </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" *ngFor="let category of categories">
+          <div class="category-container" (click)="categoryClicked(category.id)">
+            <ion-avatar>
+              <ion-img [src]="category.image && category.image.src ? category.image.src : randomGenerator()"></ion-img>
+            </ion-avatar>
+            <span class="category-name">{{category.name}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <div *ngIf="isLoading" style="text-align: center;">
       <ion-spinner name="dots"></ion-spinner>
     </div>
-    </div>
+  </div>
   <div class="title ion-padding">
     <h2 class="font-bold">Featured</h2>
     <p>See all</p>
@@ -66,11 +66,13 @@
   <div class="product-slider ion-padding-start">
     <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
       <ion-slide *ngFor="let product of featuredProducts">
+        <div style="margin: 5%;"></div>
         <ion-col class="ion-text-left" routerLink="/item-details" routerDirection="forward">
           <img src="{{ product.image }}" />
           <p>${{ product.price }}</p>
           <h6>{{ product.name }}</h6>
         </ion-col>
+
       </ion-slide>
     </ion-slides>
   </div>
@@ -83,6 +85,7 @@
   <div class="product-slider ion-padding-start">
     <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
       <ion-slide *ngFor="let product of bestSellProducts">
+        <div style="margin: 5%;"></div>
         <ion-col class="ion-text-left" routerLink="/item-details" routerDirection="forward">
           <img src="{{ product.image }}" />
           <p>${{ product.price }}</p>
@@ -93,42 +96,41 @@
   </div>
 
 
-  
-    <!-- <ion-button (click)="toggleInfiniteScroll()" expand="block">
+
+  <!-- <ion-button (click)="toggleInfiniteScroll()" expand="block">
       Toggle Infinite Scroll
     </ion-button> -->
 
-    <div class="title ion-padding">
-      <h2 class="font-bold">Products</h2>
-      <p>See all</p>
-    </div>
-  
-    <ion-list>
+  <div class="title ion-padding">
+    <h2 class="font-bold">Products</h2>
+    <p>See all</p>
+  </div>
 
-      <div class="category-slider ion-padding-start">
-        <!-- <ion-grid> -->
-        <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"> -->
-        <ion-grid style="margin-top: 15px;">
-          <ion-row>
-            <ion-col size="5" *ngFor="let product of products" (click)="categoryClicked(product.id)">
-              <img  style="border-radius: 15px;" src="{{ product.images[0] ? product.images[0].src : 'assets/products/prod-1.png'  }}">
-              <!-- <img src="{{ category.image && category.image.src ? category.image.src : randomGenerator() }}" /> -->
-              <span>{{ product.name }}</span>
-              <h4> Price: <b>35$</b> </h4>
+  <ion-list>
 
-            </ion-col>
-          </ion-row>
-          <!-- </ion-slide>
+    <div class="category-slider ion-padding-start">
+      <!-- <ion-grid> -->
+      <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }"> -->
+      <ion-grid style="margin-top: 15px;">
+        <ion-row style="margin-left: 3%;">
+          <ion-col style="margin: 5%;" size="4.5" *ngFor="let product of products" (click)="categoryClicked(product.id)">
+            <img style="border-radius: 15px;"
+              src="{{ product.images[0] ? product.images[0].src : 'assets/products/prod-1.png'  }}">
+            <!-- <img src="{{ category.image && category.image.src ? category.image.src : randomGenerator() }}" /> -->
+            <span>{{ product.name }}</span>
+            <h4> Price: <b>35$</b> </h4>
+
+          </ion-col>
+        </ion-row>
+        <!-- </ion-slide>
         </ion-slides> -->
-        </ion-grid>
-      </div>
-    </ion-list>
-  
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Loading more data...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-    
+      </ion-grid>
+    </div>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

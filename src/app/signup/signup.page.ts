@@ -56,7 +56,7 @@ export class SignupPage implements OnInit{
       role: this.role,
       subscription: this.subscription,
       subscriptionVerified: this.subscriptionVerified,
-      employeeId: this.employeeId=="" ?  "638iOUBMebtOKSJzjMjodVvNjIx1A122" : this.employeeId
+      employeeId: this.employeeId=="" ?  "1001" : this.employeeId
     }).then((result) => {
 
       if(result==true)
