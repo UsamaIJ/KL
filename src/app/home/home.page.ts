@@ -67,7 +67,7 @@ export class HomePage implements OnInit {
         });
   }
 
-  categoryClicked(id){
+  categoryClicked(id, name){
 
     let param = <categoryFilter>{ };
     param.parent = id;
@@ -80,7 +80,8 @@ export class HomePage implements OnInit {
       if(this.sub_categories.length == 0) {
         let params:NavigationExtras = {
           state: {
-            id: id
+            id: id,
+            name: name
           }
         }
         this.router.navigate(['/product-listing'],params);
@@ -89,7 +90,8 @@ export class HomePage implements OnInit {
       else {
         let params:NavigationExtras = {
           state: {
-            sub_categories: this.sub_categories
+            sub_categories: this.sub_categories,
+            name: name
           }
         }
         this.router.navigate(['/category-detail-list'],params);

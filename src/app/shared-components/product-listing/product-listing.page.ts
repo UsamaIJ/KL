@@ -14,7 +14,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./product-listing.page.scss'],
 })
 
-export class ProductListingPage implements OnInit {categoryID:any = null;
+export class ProductListingPage implements OnInit {
+  
+  categoryID:any = null;
+  categoryName: string = "";
   
   // Data Variables //
   public products: any = [];
@@ -40,6 +43,7 @@ export class ProductListingPage implements OnInit {categoryID:any = null;
 
   async ngOnInit() {
     this.categoryID = this.router.getCurrentNavigation().extras.state.id;
+    this.categoryName = this.router.getCurrentNavigation().extras.state.name;
     // alert(this.auth.userId);
     console.log(this.auth.userId);
     if(this.auth.userId){
@@ -125,7 +129,7 @@ export class ProductListingPage implements OnInit {categoryID:any = null;
     const toast = await this.toast.create({
       message: message,
       color: color,
-      duration: 2000
+      duration: 5000
     });
     toast.present();
   }

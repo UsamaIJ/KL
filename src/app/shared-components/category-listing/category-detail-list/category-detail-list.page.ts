@@ -14,6 +14,7 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class CategoryDetailListPage implements OnInit {categoryID:any = null;
   public categories: any = [];
+  categoryName: string = "";
 
 
 
@@ -26,6 +27,7 @@ export class CategoryDetailListPage implements OnInit {categoryID:any = null;
 
   async ngOnInit() {
     this.categories = this.router.getCurrentNavigation().extras.state.sub_categories;
+    this.categoryName = this.router.getCurrentNavigation().extras.state.name;
     console.log("sub-category in listing", this.categories);
     // let params = <categoryFilter>{ };
     // let productParams = <productFilter> { };

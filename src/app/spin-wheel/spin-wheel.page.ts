@@ -202,7 +202,7 @@ export class SpinWheelPage implements OnInit {
     const toast = await this.toast.create({
       message: message,
       color: color,
-      duration: 2000
+      duration: 5000
     });
     toast.present();
   }

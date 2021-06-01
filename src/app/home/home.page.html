@@ -45,7 +45,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="4" *ngFor="let category of categories">
-          <div class="category-container" (click)="categoryClicked(category.id)">
+          <div class="category-container" (click)="categoryClicked(category.id, category.name)">
             <ion-avatar>
               <ion-img [src]="category.image && category.image.src ? category.image.src : randomGenerator()"></ion-img>
             </ion-avatar>
