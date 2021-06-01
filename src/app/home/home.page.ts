@@ -26,9 +26,9 @@ export class HomePage implements OnInit {
   public products: any = [];
   public isLoading = true;
   public sliderImage = [{src: '../../../../assets/products/background1.jpg'},
-  {src: '../../../../assets/products/background1.jpg'},
-  {src: '../../../../assets/products/background1.jpg'},
-  {src: '../../../../assets/products/background1.jpg'}]
+  {src: '../../../../assets/products/background2.jpg'},
+  {src: '../../../../assets/products/background3.jpg'},
+  {src: '../../../../assets/products/background4.jpg'}]
 
   constructor(
     private data: DataService,
